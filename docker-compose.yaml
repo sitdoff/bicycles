@@ -26,12 +26,15 @@ services:
         ports:
             - "5432:5432"
 
+    redis:
+        image: redis
+
     web:
         build:
             context: .
             dockerfile: ./Dockerfile
-        entrypoint: ./entrypoint.sh uwsgi --ini uwsgi.ini
-        # entrypoint: ./entrypoint.sh python manage.py runserver 0.0.0.0:8000
+        # entrypoint: ./entrypoint.sh uwsgi --ini uwsgi.ini
+        entrypoint: ./entrypoint.sh python manage.py runserver 0.0.0.0:8000
         # entrypoint: tail -f /dev/null
         volumes:
             - ./application/:/code
@@ -39,3 +42,23 @@ services:
             - "8000:8000"
         depends_on:
             - db
+
+    celery_worker:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        entrypoint: celery -A core worker --loglevel=info
+
+        depends_on:
+            - redis
+            - web
+
+    flower:
+        image: mher/flower
+        ports:
+            - "5555:5555"
+        environment:
+            CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+            FLOWER_PORT: 5555
+        depends_on:
+            - celery_worker

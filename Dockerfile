@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION" \
     && poetry config virtualenvs.create false \
     && poetry install \
     && chmod +x /code/entrypoint.sh \
-    && python /code/manage.py collectstatic
+    && python /code/manage.py collectstatic --noinput
 
 CMD ["uwsgi", "--ini", "uwsgi.ini"]
 
