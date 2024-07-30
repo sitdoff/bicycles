@@ -19,3 +19,12 @@ pyproject.toml
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+.prettierrc.toml
+.pylintrc.bak
+note
+query_debugger.py
+application/static
+application/entrypoint.sh
+application/.env
+application/uwsgi.ini
+application/wait-for-it.sh
