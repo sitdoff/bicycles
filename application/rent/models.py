@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -24,7 +26,18 @@ class RentBicycleModel(models.Model):
     Bicycle rental model.
     """
 
-    bicycle = models.ForeignKey(BicycleModel, on_delete=models.CASCADE, related_name="bicycle")
+    bicycle = models.ForeignKey(BicycleModel, on_delete=models.CASCADE, related_name="rent")
     renter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rented_bicycles")
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(null=True)
+    paid = models.BooleanField(default=False)
+
+    @property
+    def cost(self):
+        """
+        Returns cost of bicycle rent.
+        """
+        if self.end_time:
+            result = self.bicycle.cost_per_hour * Decimal((self.end_time - self.start_time).seconds / 3600)
+            return result
+        return None
