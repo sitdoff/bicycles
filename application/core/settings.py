@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "djoser",
     "rest_framework_simplejwt",
     "users.apps.UsersConfig",
+    "rent.apps.RentConfig",
 ]
 
 MIDDLEWARE = [
