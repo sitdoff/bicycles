@@ -20,6 +20,5 @@ from django.urls import include, path, re_path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    re_path("", include("djoser.urls")),
-    re_path("", include("djoser.urls.jwt")),
+    path("auth/", include("users.urls")),
 ]
