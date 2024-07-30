@@ -21,6 +21,7 @@ class RentBicycleSerializer(serializers.ModelSerializer):
     cost = serializers.DecimalField(max_digits=5, decimal_places=2, read_only=True)
     paid = serializers.ReadOnlyField()
     renter = serializers.PrimaryKeyRelatedField(read_only=True)
+    end_time = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = RentBicycleModel

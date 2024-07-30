@@ -15,7 +15,7 @@ class BicycleModel(models.Model):
 
     brand = models.CharField(max_length=50)
     cost_per_hour = models.DecimalField(max_digits=5, decimal_places=2)
-    is_rented = models.BooleanField(db_index=True)
+    is_rented = models.BooleanField()
 
     def __str__(self):
         return f"{self.brand} ${self.cost_per_hour} per hour"

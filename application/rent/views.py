@@ -35,7 +35,7 @@ class RentBicycleView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self) -> QuerySet[BicycleModel]:
-        return self.request.user.rented_bicycles.order_by("-end_time")
+        return self.request.user.rented_bicycles.select_related("bicycle").order_by("-end_time")
 
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -67,4 +67,4 @@ class StopRentView(APIView):
         bicycle = rent.bicycle
         bicycle.is_rented = False
         bicycle.save()
-        return Response({"success": "Bike returned", "rent": rent.pk}, status=200)
+        return Response({"success": "Bicycle returned", "rent": rent.pk}, status=200)
