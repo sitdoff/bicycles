@@ -1,5 +1,6 @@
 stages:
     - print
+    - build
     - run_tests
 
 print_message:
@@ -7,7 +8,13 @@ print_message:
     script:
         - echo "Hello, World!"
 
+build:dev:
+    stage: build
+    script:
+        - cp docker-compose.yml Dockerfile .
+        - docker-compose up --build
+
 run_tests:
     stage: run_tests
     script:
-        - pytest
+        - docker exec -i bicycles-web-1 pytest
