@@ -16,7 +16,7 @@ build:dev:
     stage: build
     script:
         # - cp docker-compose.yaml Dockerfile .
-        - docker-compose up --build
+        - docker compose up --build
 
 run_tests:
     stage: run_tests
