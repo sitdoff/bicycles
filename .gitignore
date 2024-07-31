@@ -15,7 +15,6 @@ db.sqlite3
 .flake8
 .pylintrc
 .perttierrc.toml
-pyproject.toml
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py

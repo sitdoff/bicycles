@@ -1,0 +1,60 @@
+[tool.pyright]
+reportIncompatibleMethodOverride = false
+reportIncompatibleVariableOverride = false
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "core.settings.development"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.djlint]
+profile="django"
+blank_line_before_tag="load,extends,include,block"
+blank_line_after_tag="load,extends,include,endblock"
+indent=4
+ignore = "H006,"
+# line_break_after_multiline_tag=true
+close_void_tags=true
+custom_blocks="cache"
+
+[tool.poetry]
+name = "bicycles"
+version = "0.1.0"
+description = ""
+authors = ["Roman Ivanov <sitdoff@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.7"
+psycopg2-binary = "^2.9.9"
+environs = "^11.0.0"
+djangorestframework = "^3.15.2"
+djangorestframework-simplejwt = "^5.3.1"
+djoser = "^2.2.3"
+uwsgi = "^2.0.26"
+celery = "^5.4.0"
+redis = "^5.0.7"
+pytest-django = "^4.8.0"
+pytz = "^2024.1"
+drf-yasg = "^1.21.7"
+
+
+[tool.poetry.group.dev.dependencies]
+django-extensions = "^3.2.3"
+django-debug-toolbar = "^4.4.6"
+werkzeug = "^3.0.3"
+django-stubs = "^5.0.4"
+djangorestframework-stubs = "^3.15.0"
+django-stubs-ext = "^5.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
