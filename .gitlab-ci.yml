@@ -1,7 +1,13 @@
 stages:
+    - print
     - tests
+
+print_message:
+    stage: print
+    script:
+        - echo "Hello, World!"
 
 run_tests:
     stage: tests
     script:
-        - python pytest
+        - python3 pytest
