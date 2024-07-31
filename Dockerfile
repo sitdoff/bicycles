@@ -9,7 +9,7 @@ ENV POETRY_VERSION=1.6.1
 
 WORKDIR /code
 
-COPY poetry.lock pyproject.toml wait-for-it.sh entrypoint.sh .env uwsgi.ini pytest.ini ./application/ /code/
+COPY poetry.lock pyproject.toml wait-for-it.sh entrypoint.sh .env uwsgi.ini pytest.ini .env ./application/ /code/
 
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION" \
     && apk update \
