@@ -136,7 +136,14 @@ class StopRentView(APIView):
     @swagger_auto_schema(
         responses={
             200: '{"success": "Bicycle returned", "rent": {rent.pk}}',
-            401: "Authentication credentials were not provided.",
+            401: openapi.Response(
+                description="Authentication credentials were not provided.",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={"detail": openapi.Schema(type=openapi.TYPE_STRING)},
+                    example={"detail": "Authentication credentials were not provided."},
+                ),
+            ),
             404: "No active rent",
         }
     )
