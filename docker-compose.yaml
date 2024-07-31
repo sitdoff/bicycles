@@ -36,6 +36,8 @@ services:
         # entrypoint: ./entrypoint.sh uwsgi --ini uwsgi.ini
         entrypoint: ./entrypoint.sh python manage.py runserver 0.0.0.0:8000
         # entrypoint: tail -f /dev/null
+        environment:
+            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
         volumes:
             - ./application/:/code
         ports:
@@ -48,7 +50,8 @@ services:
             context: .
             dockerfile: ./Dockerfile
         entrypoint: celery -A core worker --loglevel=info
-
+        environment:
+            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
         depends_on:
             - redis
             - web
