@@ -2,6 +2,7 @@ from typing import Any
 
 from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
+from rent.tasks import start_process_rent
 from rest_framework.generics import ListAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
@@ -10,7 +11,6 @@ from rest_framework.views import APIView
 
 from .models import BicycleModel, RentBicycleModel
 from .serializers import BicycleSerializer, RentBicycleSerializer
-from .tasks import start_process_rent
 
 # Create your views here.
 User = get_user_model()
@@ -64,6 +64,8 @@ class StopRentView(APIView):
 
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         rent: RentBicycleModel = request.user.rented_bicycles.filter(end_time=None).first()
+        if not rent:
+            return Response({"error": "No active rent"}, status=404)
         bicycle = rent.bicycle
         bicycle.is_rented = False
         bicycle.save()

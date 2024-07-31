@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import ROUND_UP, Decimal
 
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -20,6 +20,10 @@ class BicycleModel(models.Model):
     def __str__(self):
         return f"{self.brand} ${self.cost_per_hour} per hour"
 
+    def save(self, *args, **kwargs):
+        self.cost_per_hour = self.cost_per_hour.quantize(Decimal("0.01"), rounding=ROUND_UP)
+        super().save(*args, **kwargs)
+
 
 class RentBicycleModel(models.Model):
     """
@@ -37,7 +41,10 @@ class RentBicycleModel(models.Model):
         """
         Returns cost of bicycle rent.
         """
+
         if self.end_time:
-            result = self.bicycle.cost_per_hour * Decimal((self.end_time - self.start_time).seconds / 3600)
+            delta = self.end_time - self.start_time
+            hours = Decimal(delta.total_seconds() / 3600).quantize(Decimal("0.01"))
+            result = self.bicycle.cost_per_hour * hours
             return result
         return None

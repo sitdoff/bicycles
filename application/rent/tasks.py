@@ -7,7 +7,7 @@ from .models import BicycleModel, RentBicycleModel
 
 
 @shared_task
-def start_process_rent(rent_id, bicycle_id: int) -> None:
+def start_process_rent(rent_id, bicycle_id: int, wait_time: int = 5) -> None:
     """
     The task keeps track of rental time.
 
@@ -17,7 +17,7 @@ def start_process_rent(rent_id, bicycle_id: int) -> None:
     bicycle.is_rented = True
     bicycle.save()
     while bicycle.is_rented:
-        sleep(5)
+        sleep(wait_time)
         bicycle.refresh_from_db()
     rent: RentBicycleModel = RentBicycleModel.objects.get(pk=rent_id)
     rent.end_time = datetime.now()
