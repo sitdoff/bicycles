@@ -21,8 +21,8 @@ services:
             POSTGRES_DB: ${POSTGRES_DB}
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        volumes:
-            - ~/Документы/docker/postgres-data/bycicles/:/var/lib/postgresql/data/
+        # volumes:
+        # - ~/Документы/docker/postgres-data/bycicles/:/var/lib/postgresql/data/
         ports:
             - "5432:5432"
 
@@ -38,8 +38,8 @@ services:
         # entrypoint: tail -f /dev/null
         environment:
             - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-        volumes:
-            - ./application/:/code
+        # volumes:
+        #     - ./application/:/code
         ports:
             - "8000:8000"
         depends_on:
