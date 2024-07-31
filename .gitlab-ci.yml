@@ -13,7 +13,7 @@ print_message:
     script:
         - echo "Hello, World!"
 
-build:dev:
+build:
     stage: build
     script:
         - docker compose up --build
@@ -27,4 +27,5 @@ cleanup:
     stage: cleanup
     when: always
     script:
+        - docker compose down
         - docker system prune --force
