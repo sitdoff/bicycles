@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION" \
     && poetry config virtualenvs.create false \
     && poetry install \
     && chmod +x /code/entrypoint.sh \
+    && chmod +x /code/wait-for-it.sh \
 
 
 
