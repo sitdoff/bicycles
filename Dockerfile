@@ -9,7 +9,7 @@ ENV POETRY_VERSION=1.6.1
 
 WORKDIR /code
 
-COPY poetry.lock pyproject.toml wait-for-it.sh entrypoint.sh .env uwsgi.ini ./application/ /code/
+COPY poetry.lock pyproject.toml wait-for-it.sh entrypoint.sh .env uwsgi.ini pytest.ini ./application/ /code/
 
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION" \
     && apk update \
@@ -17,7 +17,6 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION" \
     && poetry config virtualenvs.create false \
     && poetry install \
     && chmod +x /code/entrypoint.sh \
-    && python /code/manage.py collectstatic --noinput
 
-CMD ["uwsgi", "--ini", "uwsgi.ini"]
+
 
