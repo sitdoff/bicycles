@@ -6,6 +6,7 @@ stages:
     - print
     - build
     - run_tests
+    - cleanup
 
 print_message:
     stage: print
@@ -15,10 +16,15 @@ print_message:
 build:dev:
     stage: build
     script:
-        # - cp docker-compose.yaml Dockerfile .
         - docker compose up --build
 
 run_tests:
     stage: run_tests
     script:
         - docker exec -i bicycles-web-1 pytest
+
+cleanup:
+    stage: cleanup
+    when: always
+    script:
+        - docker system prune --force
