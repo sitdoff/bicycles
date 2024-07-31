@@ -11,7 +11,7 @@ print_message:
 build:dev:
     stage: build
     script:
-        - cp docker-compose.yml Dockerfile .
+        - cp docker-compose.yaml Dockerfile .
         - docker-compose up --build
 
 run_tests:
