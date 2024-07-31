@@ -1,6 +1,6 @@
 stages:
     - print
-    - tests
+    - run_tests
 
 print_message:
     stage: print
@@ -8,6 +8,6 @@ print_message:
         - echo "Hello, World!"
 
 run_tests:
-    stage: tests
+    stage: run_tests
     script:
-        - python3 pytest
+        - pytest
