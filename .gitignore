@@ -29,3 +29,4 @@ application/.env
 application/uwsgi.ini
 application/wait-for-it.sh
 .env
+application/pytest.ini
