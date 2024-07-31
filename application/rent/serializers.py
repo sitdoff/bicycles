@@ -35,3 +35,11 @@ class RentBicycleSerializer(serializers.ModelSerializer):
         user = request.user
         validated_data["renter"] = user
         return super().create(validated_data)
+
+
+class ErrorResponseSerializer(serializers.Serializer):
+    """
+    Serializer for swagger.
+    """
+
+    error = serializers.CharField()
