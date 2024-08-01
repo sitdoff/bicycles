@@ -21,6 +21,7 @@ test:
     stage: test
     script:
         - cd application
+        - python manage.py migrate --run-syncdb
         - poetry run pytest --disable-warnings
     artifacts:
         when: always
