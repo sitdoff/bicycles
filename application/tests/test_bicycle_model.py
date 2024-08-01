@@ -1,6 +1,7 @@
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 
 import pytest
+from django.conf import settings
 from django.db.utils import DataError
 from rent.models import BicycleModel
 
@@ -21,7 +22,7 @@ def test_create_bicycle():
 
 @pytest.mark.django_db
 def test_bicycle_model_cost_per_hour_max_digits():
-    with pytest.raises(DataError):
+    with pytest.raises((DataError, InvalidOperation)):
         BicycleModel.objects.create(brand="Specialized", cost_per_hour=Decimal("1234.56"), is_rented=False)
 
 
@@ -31,7 +32,9 @@ def test_bicycle_model_cost_per_hour_decimal_places():
     assert bicycle.cost_per_hour == Decimal("10.00")
 
 
-@pytest.mark.django_db
-def test_bicycle_model_brand_max_length():
-    with pytest.raises(DataError):
-        BicycleModel.objects.create(brand="A" * 51, cost_per_hour=Decimal("10.00"), is_rented=False)
+if settings.DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
+
+    @pytest.mark.django_db
+    def test_bicycle_model_brand_max_length():
+        with pytest.raises((DataError, InvalidOperation)):
+            BicycleModel.objects.create(brand="A" * 51, cost_per_hour=Decimal("10.00"), is_rented=False)

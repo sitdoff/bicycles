@@ -1,31 +1,27 @@
+image: python:3.12
+
+services:
+    - postgres:latest
+
 variables:
-    HOME: /home/gitlab-runner
-    BUILD_NAME: backend
+    DJANGO_SETTINGS_MODULE: "core.settings.testing"
+    PYTHONUNBUFFERED: "1"
+
+cache:
+    paths:
+        - .pip-cache/
+
+before_script:
+    - pip install --no-cache-dir "poetry==$POETRY_VERSION"
+    - poetry config virtualenvs.create false
+    - poetry install
 
 stages:
-    - print
-    - build
-    - run_tests
-    - cleanup
+    - test
 
-print_message:
-    stage: print
+tests:
+    stages: test
     script:
-        - echo "Hello, World!"
-
-build:
-    stage: build
-    script:
-        - docker compose up --build
-
-run_tests:
-    stage: run_tests
-    script:
-        - docker exec -i bicycles-web-1 pytest
-
-cleanup:
-    stage: cleanup
-    when: always
-    script:
-        - docker compose down
-        - docker system prune --force
+        - poetry run pytest --disable-warnings
+    artifacts:
+        when: always

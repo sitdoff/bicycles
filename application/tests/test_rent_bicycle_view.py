@@ -58,7 +58,9 @@ def test_rent_bicycle_view_create_rent_already_rented(api_client, user, bicycle)
 
 
 @pytest.mark.django_db
-def test_rent_bicycle_view_create_rent_user_already_has_rent(api_client, user, bicycle, create_rented_bicycle):
+def test_rent_bicycle_view_create_rent_user_already_has_rent(
+    api_client, user, bicycle, create_rented_bicycle, mock_start_process_rent
+):
     api_client.login(username="testuser", password="password")
 
     data = {"bicycle": bicycle.id}
