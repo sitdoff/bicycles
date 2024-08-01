@@ -12,9 +12,7 @@ cache:
         - .pip-cache/
 
 before_script:
-    - pip install --no-cache-dir poetry
-    - poetry config virtualenvs.create false
-    - poetry install
+    - pip install -r requirements.txt
 
 stages:
     - test
@@ -22,6 +20,6 @@ stages:
 test:
     stage: test
     script:
-        - poetry run pytest --disable-warnings
+        - pytest
     artifacts:
         when: always
