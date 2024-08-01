@@ -28,3 +28,5 @@ application/.env
 application/uwsgi.ini
 application/wait-for-it.sh
 application/pytest.ini
+demo_fixture.json.bu
+.env_example
