@@ -10,8 +10,6 @@ DATABASES = {
     }
 }
 
-# CELERY_TASK_EAGER_PROPAGATES = True
-# CELERY_TASK_ALWAYS_EAGER = True
 BROKER_BACKEND = "memory://"
 CELERY_BROKER_URL = "memory://"
 CELERY_RESULT_BACKEND = "db+sqlite:///results.sqlite"
