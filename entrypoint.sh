@@ -12,5 +12,8 @@ python manage.py makemigrations  && python manage.py migrate  && python manage.p
 # Сбор статических файлов
 python manage.py collectstatic --noinput --clear
 
+# Запуск тестов
+pytest
+
 # Запуск вашего Django приложения
 exec "$@"
