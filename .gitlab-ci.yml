@@ -19,7 +19,7 @@ before_script:
 stages:
     - test
 
-tests:
+test:
     stages: test
     script:
         - poetry run pytest --disable-warnings
