@@ -20,7 +20,7 @@ stages:
     - test
 
 test:
-    stages: test
+    stage: test
     script:
         - poetry run pytest --disable-warnings
     artifacts:
