@@ -69,7 +69,7 @@ Payload:
 {
   "username": string,
   "email": string,
-  "password": "string
+  "password": string
 }
 ```
 
@@ -89,7 +89,7 @@ Answer:
 {
     "username": string,
     "email": string,
-    "id": "integer"
+    "id": integer
 }
 ```
 
@@ -300,13 +300,13 @@ Answer:
 1. Склонировать проект
 
 ```bash
-
+git clone git@github.com:sitdoff/bicycles.git
 ```
 
 2. Перейти в папку проекта
 
 ```bash
-
+cd bicycles
 ```
 
 3. Если есть необходимость, отредактировать файл .env
