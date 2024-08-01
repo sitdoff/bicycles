@@ -13,7 +13,7 @@ python manage.py makemigrations  && python manage.py migrate  && python manage.p
 python manage.py collectstatic --noinput --clear
 
 # Запуск тестов
-pytest
+pytest --no-warning
 
 # Запуск вашего Django приложения
 exec "$@"
