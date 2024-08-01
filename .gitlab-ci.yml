@@ -22,7 +22,6 @@ test:
     script:
         - cd application
         - python manage.py makemigrations
-        - python manage.py migrate
         - poetry run pytest --disable-warnings
     artifacts:
         when: always
