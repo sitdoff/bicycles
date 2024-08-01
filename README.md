@@ -300,7 +300,7 @@ Answer:
 1. Склонировать проект
 
 ```bash
-git clone git@github.com:sitdoff/bicycles.git
+git clone https://github.com/sitdoff/bicycles.git
 ```
 
 2. Перейти в папку проекта
