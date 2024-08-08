@@ -10,8 +10,8 @@ cache:
         - .pip-cache/
 
 before_script:
-    - apt-get update
-    - apt-get install pip
+    - apk update
+    - apk install pip
     - pip install --no-cache-dir "poetry==$POETRY_VERSION"
     - poetry config virtualenvs.create false
     - poetry install
