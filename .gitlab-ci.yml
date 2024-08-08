@@ -15,10 +15,11 @@ before_script:
     - poetry install
 
 stages:
-    - test
+    - test_stage
 
 test:
-    stage: test
+    stage: test_stage
+    tags: [test]
     script:
         - cd application
         - python manage.py makemigrations
