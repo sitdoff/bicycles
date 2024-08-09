@@ -8,11 +8,6 @@ cache:
     paths:
         - .pip-cache/
 
-before_script:
-    - poetry env use python3.12
-    - poetry shell
-    - poetry install
-
 stages:
     - test_stage
 
@@ -20,6 +15,8 @@ test:
     stage: test_stage
     image: python:3.12
     tags: [test]
+    before_script:
+        - pip install -r requirements.txt
     script:
         - cd application
         - python3.12 manage.py makemigrations
