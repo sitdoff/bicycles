@@ -7,10 +7,10 @@ set -e
 
 # Применение миграций, если это необходимо
 # Загрузка данных для демонстрации
-python manage.py makemigrations  && python manage.py migrate  && python manage.py loaddata demo_fixture.json
+python manage.py makemigrations && python manage.py migrate && python manage.py loaddata demo_fixture.json
 
 # Сбор статических файлов
-python manage.py collectstatic --noinput --clear
+python manage.py collectstatic --noinput
 
 # Запуск тестов
 pytest --disable-warnings
