@@ -10,7 +10,7 @@ cache:
         - .pip-cache/
 
 before_script:
-    - pip install --no-cache-dir "poetry==$POETRY_VERSION"
+    - pip3.12 install --no-cache-dir "poetry==$POETRY_VERSION"
     - poetry config virtualenvs.create false
     - poetry install
 
@@ -23,7 +23,7 @@ test:
     tags: [test]
     script:
         - cd application
-        - python manage.py makemigrations
-        - poetry run pytest --disable-warnings
+        - python3.12 manage.py makemigrations
+        - poetry3.12 run pytest --disable-warnings
     artifacts:
         when: always
