@@ -18,6 +18,7 @@ test:
     before_script:
         - pip install -r requirements.txt
     script:
+        - cd application
         - python3.12 -m pytest --disable-warnings
     artifacts:
         when: always
