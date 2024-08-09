@@ -9,7 +9,8 @@ cache:
         - .pip-cache/
 
 before_script:
-    - poetry shell python3.12
+    - poetry env use python3.12
+    - poetry shell
     - poetry install
 
 stages:
