@@ -19,6 +19,7 @@ stages:
 
 test:
     stage: test_stage
+    image: python:3.12
     tags: [test]
     script:
         - cd application
