@@ -27,4 +27,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        cd application && python manage.py makemigrations && python -m pytest --disable-warnings
+        cd application
+        python manage.py makemigrations
+        python -m pytest --disable-warnings
