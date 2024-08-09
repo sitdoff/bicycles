@@ -1,4 +1,11 @@
 services:
+    # nginx:
+    #     build:
+    #         context: .
+    #         dockerfile: ./nginx/Dockerfile
+    #     ports:
+    #         - 80:80
+
     db:
         image: postgres
         environment:
@@ -15,8 +22,8 @@ services:
         build:
             context: .
             dockerfile: ./Dockerfile
-        entrypoint: ./entrypoint.sh python manage.py runserver 0.0.0.0:8000
-        # entrypoint: ./entrypoint.sh uwsgi --ini uwsgi.ini
+        # entrypoint: ./entrypoint.sh python manage.py runserver 0.0.0.0:8000
+        entrypoint: ./entrypoint.sh uwsgi --ini uwsgi.ini
         environment:
             - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
         ports:
