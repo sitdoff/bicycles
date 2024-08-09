@@ -1,10 +1,14 @@
 services:
-    # nginx:
-    #     build:
-    #         context: .
-    #         dockerfile: ./nginx/Dockerfile
-    #     ports:
-    #         - 80:80
+    nginx:
+        build:
+            context: .
+            dockerfile: ./nginx/Dockerfile
+        ports:
+            - 80:80
+        volumes:
+            - static_files:/code/static/
+        depends_on:
+            - web
 
     db:
         image: postgres
@@ -28,6 +32,8 @@ services:
             - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
         ports:
             - "8000:8000"
+        volumes:
+            - static_files:/code/static/
         depends_on:
             - db
 
@@ -51,3 +57,6 @@ services:
             FLOWER_PORT: 5555
         depends_on:
             - celery_worker
+
+volumes:
+    static_files:
