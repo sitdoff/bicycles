@@ -3,15 +3,13 @@ image: python:3.12
 variables:
     DJANGO_SETTINGS_MODULE: "core.settings.testing"
     PYTHONUNBUFFERED: "1"
-    POETRY_VERSION: 1.6.1
 
 cache:
     paths:
         - .pip-cache/
 
 before_script:
-    - pip3.12 install --no-cache-dir "poetry==$POETRY_VERSION"
-    - poetry config virtualenvs.create false
+    - poetry shell python3.12
     - poetry install
 
 stages:
