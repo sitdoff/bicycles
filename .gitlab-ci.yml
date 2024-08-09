@@ -18,6 +18,6 @@ test:
     before_script:
         - pip install -r requirements.txt
     script:
-        - pytest --disable-warnings
+        - python3.12 -m pytest --disable-warnings
     artifacts:
         when: always
